@@ -1,10 +1,14 @@
 
 import { FunctionalComponent, h } from 'preact';
+import { GifPlayer } from '../../components/gif-player';
 
 const Party: FunctionalComponent = (props) => {
   console.log(props)
   return (
-    <h1>Party {props.id}</h1>
+    <div>
+      <h1>Party {props.id}</h1>
+      <GifPlayer />
+    </div>
   )
 }
 
