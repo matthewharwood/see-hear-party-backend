@@ -5,7 +5,7 @@ import {useSnapshot} from "../../hooks/use-snapshot";
 import {db} from "../../firestore";
 
 
-const Playlist: FunctionalComponent<{id: string}> = (props) => {
+const Keywords: FunctionalComponent<{id: string}> = (props) => {
   const [tag1, updateTag1] = useState('');
   const { loading, data } = useSnapshot(db.collection("playlists"));
 
@@ -82,4 +82,4 @@ const Playlist: FunctionalComponent<{id: string}> = (props) => {
   )
 }
 
-export default Playlist;
+export default Keywords;

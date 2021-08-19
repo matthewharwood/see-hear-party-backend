@@ -11,17 +11,17 @@ export function shuffle(arr): any[] {
     return array;
 }
 
-const GifPlayer: FunctionalComponent = (props: {gifs: Array<string>}) => {
+const GifPlayer: FunctionalComponent<{gifs: Array<string>}> = (props) => {
     const [count, setCount] = useState(0);
-    const [play, setPlay] = useState(true);
-    console.log(props.gifs)
+    const [play] = useState(true);
+
     const _gifs = useMemo(() => shuffle(props.gifs), [props.gifs]);
     const _gifsMaxIndex = _gifs.length - 1;
+
     useInterval(() => {
         if (_gifs && play) {
             const next = count + 1;
             setCount(next % _gifsMaxIndex)
-            console.log(_gifs[count], count)
         }
   }, 2000);
 

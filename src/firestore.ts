@@ -1,9 +1,11 @@
 
-import { getFirestore } from "firebase/firestore";
+let db:any = null;
 
+const getDb = (firebase): void => {
+    db = firebase.firestore();
+};
 
-const db = getFirestore();
-
-export {db};
-
-// db.settings({timestampsInSnapshots: true})
+export {
+    getDb,
+    db,
+}
