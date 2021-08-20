@@ -10,6 +10,7 @@ import {KEYWORDS_COLLECTION} from './config';
 const Party: FunctionalComponent<{id: string}> = (props) => {
   const [gifs, updateGifs] = useState([]); // set state for gif
   const { loading: keywordLoading, data: keywordData } = useSnapshot(db.collection(KEYWORDS_COLLECTION)); // get keywordData from keywords
+  // @ts-ignore
   const getGifs = async (url = '', keywordData = {}): any => {
 
         const response = await fetch(url, {
@@ -31,13 +32,10 @@ const Party: FunctionalComponent<{id: string}> = (props) => {
   }
 
   useEffect(() => {
-      console.log('once', keywordLoading, keywordData)
-
       if(!keywordLoading && keywordData) {
-          const tagData = {tags: keywordData.map(({value}) => {
+          const tagData = {tags: (keywordData || []).map(({value = {slug: ''}}) => {
                   return  value.slug
               }).join(',')};
-          console.log('inside');
           getGifs(
               'https://us-central1-see-hear-party.cloudfunctions.net/submitTags',
               tagData

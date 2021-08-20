@@ -9,6 +9,7 @@ const Keywords: FunctionalComponent<{id: string}> = (props) => {
   const [tag1, updateTag1] = useState('');
   const { loading, data } = useSnapshot(db.collection("playlists"));
 
+  // @ts-ignore
   const postData = async (url = '', data = {}): any => {
         // Default options are marked with *
         const response = await fetch(url, {
@@ -29,8 +30,9 @@ const Keywords: FunctionalComponent<{id: string}> = (props) => {
   const onDelete = (id) => {
       db.collection('playlists').doc(id).delete()
   };
-
+ //@ts-ignore
   const onSubmit = () => {
+      // @ts-ignore
       const tagData = {tags: loading ? tag1 : data.map(({value}) => {
               return  value.slug
           }).concat(tag1).join(',')};
@@ -43,7 +45,8 @@ const Keywords: FunctionalComponent<{id: string}> = (props) => {
           tagData,
       )
   };
-  return (
+
+    return data ? (
     <div>
         <div className="h-100 w-full flex items-center justify-center bg-teal-lightest font-sans">
             <div className="bg-white rounded shadow p-6 m-4 w-full lg:w-3/4 lg:max-w-lg">
@@ -60,7 +63,8 @@ const Keywords: FunctionalComponent<{id: string}> = (props) => {
                     </div>
                 </div>
                 <div>
-                    {loading ? null : data.map(({value, id}) => {
+
+                    {loading ? null : (data || []).map(({value = {slug: ''}, id}) => {
                         return (
                             <div key={id} className="flex mb-4 items-center">
                                 <p className="w-full text-green">{value.slug}</p>
@@ -79,7 +83,7 @@ const Keywords: FunctionalComponent<{id: string}> = (props) => {
 
 
     </div>
-  )
+  ) : null;
 }
 
 export default Keywords;

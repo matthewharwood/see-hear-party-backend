@@ -1,5 +1,4 @@
 import { FunctionalComponent, h } from 'preact';
-import style from './style.css';
 
 // https://www.seehearparty.com/party/:id
 const Home: FunctionalComponent = () => {
